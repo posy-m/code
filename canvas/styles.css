@@ -1,0 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+#c1 {
+  border: 2px solid black;
+  margin: 5rem;
+}
