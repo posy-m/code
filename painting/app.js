@@ -1,3 +1,4 @@
+const textInput = document.getElementById('text')
 const file = document.getElementById('file')
 const modeBtn = document.getElementById('mode-btn')
 const destroyByn = document.getElementById('destroy-btn')
@@ -15,6 +16,7 @@ const CANVAS_HEIGHT = 800;
 
 canvas.width = CANVAS_WIDTH;
 canvas.height = CANVAS_HEIGHT;
+ctx.lineCap = "round"
 ctx.lineWidth = lineWidth.value;
 let isPainting = false;
 let isFilling = false;
@@ -93,10 +95,26 @@ function onFileChange(event) {
   }
 }
 
+function onDoubleClick(event) {
+  ctx.save(); // 현재상태를 저장
+  const text = textInput.value;
+  if (text !== "") {
+    ctx.lineWidth = 1;
+    ctx.font = '68px serif'
+    ctx.fillText(text, event.offsetX, event.offsetY);
+    //fillStork르 사용하면 선만 나옴
+    ctx.restore(); // 저장했던 버전으로 돌림 
+    // console.log(event.offsetX, event.offsetY);
+  }
+
+}
+
 
 // canvas.onmousemove = function () {
 
 // }
+
+canvas.addEventListener('dblclick', onDoubleClick);
 canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("mousedown", startPainting);
 canvas.addEventListener("mouseup", cancelPainting);
